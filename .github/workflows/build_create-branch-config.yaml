@@ -35,7 +35,7 @@ jobs:
          echo API_TOKEN=${{ secrets.API_TOKEN }} >> .env && \
          echo OWNER_NAME=${{ secrets.OWNER_NAME }} >> .env && \
          echo APP_NAME=${{ secrets.APP_NAME }} >> .env && \
-         echo BRANCH=${{ github.ref_name }} >> .env && \
+         echo BRANCH=${{ secrets.BRANCH }} >> .env && \
          echo CONFIG=${{ secrets.CONFIG }} >> .env
          cat .env
       - run: pwd 
@@ -56,11 +56,11 @@ jobs:
       - name: e2e-test
         uses: ./build_create-branch-config
         with:
-          apiToken: ${{ secrets.apiToken }}
-          ownerName: ${{ secrets.ownerName }}
-          appName: ${{ secrets.appName }}
-          branch: ${{ github.ref_name }}
-          config: ${{ secrets.config }}
+          apiToken: ${{ secrets.API_TOKEN }}
+          ownerName: ${{ secrets.OWNER_NAME }}
+          appName: ${{ secrets.APP_NAME }}
+          branch: ${{ secrets.BRANCH }}
+          config: ${{ secrets.CONFIG }}
 
 #  generate:
 #    runs-on: ubuntu-latest
