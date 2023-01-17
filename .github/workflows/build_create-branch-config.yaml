@@ -36,7 +36,7 @@ jobs:
          echo OWNER_NAME=${{ secrets.OWNER_NAME }} >> .env && \
          echo APP_NAME=${{ secrets.APP_NAME }} >> .env && \
          echo BRANCH=${{ secrets.BRANCH }} >> .env && \
-         echo CONFIG=${{ secrets.CONFIG }} >> .env
+         echo CONFIG=${{ env.CONFIG }} >> .env
          cat .env
       - run: pwd 
       - run: ls -a
