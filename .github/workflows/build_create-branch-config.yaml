@@ -29,11 +29,11 @@ jobs:
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          apiToken: ${{ secrets.apiToken }}
-          ownerName: ${{ secrets.ownerName }}
-          appName: ${{ secrets.appName }}
-          branch: ${{ github.ref_name }}
-          config: ${{ secrets.config }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+          OWNER_NAME: ${{ secrets.OWNER_NAME }}
+          APP_NAME: ${{ secrets.APP_NAME }}
+          BRANCH: ${{ github.ref_name }}
+          CONFIG: ${{ secrets.CONFIG }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
