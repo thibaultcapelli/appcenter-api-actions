@@ -23,21 +23,18 @@ defaults:
 jobs:
   test:
     environment: build_create-branch-config
+    env:
+     API_TOKEN: ${{ secrets.API_TOKEN }}
+     OWNER_NAME: ${{ vars.OWNER_NAME }}
+     APP_NAME: ${{ vars.APP_NAME }}
+     BRANCH: ${{ vars.BRANCH }}
+     CONFIG: ${{ vars.CONFIG }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
       - run: pwd
       - run: ls -a
-      - name: Make envfile
-        run: |
-         touch .env
-         echo API_TOKEN=${{ secrets.API_TOKEN }} >> .env && \
-         echo OWNER_NAME=${{ secrets.OWNER_NAME }} >> .env && \
-         echo APP_NAME=${{ secrets.APP_NAME }} >> .env && \
-         echo BRANCH=${{ secrets.BRANCH }} >> .env && \
-         echo CONFIG=${{ vars.CONFIG }} >> .env
-         cat .env
       - run: pwd 
       - run: ls -a
       - uses: actions/setup-node@v3
