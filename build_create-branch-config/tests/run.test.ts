@@ -4,6 +4,10 @@ import { fetchApi } from "@appcenter-api-actions/common/lib/services/api";
 
 dotenv.config();
 
+console.log('API_TOKEN=', process.env.API_TOKEN);
+
+console.log('CONFIG=', process.env.CONFIG);
+
 const apiToken = process.env.API_TOKEN as string;
 const ownerName = process.env.OWNER_NAME as string;
 const appName = process.env.APP_NAME as string;
