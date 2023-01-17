@@ -34,7 +34,7 @@ jobs:
              echo "OWNER_NAME=" + ${{ secrets.OWNER_NAME }} >> .env && \
              echo "APP_NAME=" + ${{ secrets.APP_NAME }} >> .env && \
              echo "BRANCH=" + ${{ github.ref_name }} >> .env && \
-             echo "CONFIG=" + ${{ secrets.CONFIG }} >> .env && \
+             echo "CONFIG=" + ${{ secrets.CONFIG }} >> .env
       - run: pwd 
       - run: ls
       - uses: actions/setup-node@v3
