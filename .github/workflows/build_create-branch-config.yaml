@@ -20,12 +20,20 @@ defaults:
   run:
     working-directory: build_create-branch-config
 
-jobs:      
+jobs:
   test:
     environment: build_create-branch-config
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          apiToken: ${{ secrets.apiToken }}
+          ownerName: ${{ secrets.ownerName }}
+          appName: ${{ secrets.appName }}
+          branch: ${{ github.ref_name }}
+          config: ${{ secrets.config }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
