@@ -26,7 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - run: pwd
       - uses: actions/checkout@v3
+      - run: pwd
       - run: ls
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
@@ -37,6 +39,7 @@ jobs:
           BRANCH: ${{ github.ref_name }}
           CONFIG: ${{ secrets.CONFIG }}
           directory: common
+      - run: pwd
       - run: ls
       - uses: actions/setup-node@v3
         with:
