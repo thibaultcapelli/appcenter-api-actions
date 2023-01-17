@@ -1,0 +1,71 @@
+name: build_create-branch-config
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - build_create-branch-config/**
+      - '*.json'
+      - '*.js'
+      - .github/workflows/build_create-branch-config.yaml
+  pull_request:
+    branches: [main]
+    paths:
+      - hello-world/**
+      - '*.json'
+      - '*.js'
+      - .github/workflows/build_create-branch-config.yaml
+
+defaults:
+  run:
+    working-directory: build_create-branch-config
+
+jobs:
+  test:
+    environment: build_create-branch-config
+    env:
+     API_TOKEN: ${{ secrets.API_TOKEN }}
+     OWNER_NAME: ${{ vars.OWNER_NAME }}
+     APP_NAME: ${{ vars.APP_NAME }}
+     BRANCH: ${{ vars.BRANCH }}
+     CONFIG: ${{ vars.CONFIG }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+      - run: yarn
+      - run: yarn workspace @appcenter-api-actions/common install
+      - run: yarn workspace @appcenter-api-actions/common run build
+      - run: yarn workspace @appcenter-api-actions/common run package
+#       - run: yarn lint
+      - run: yarn test
+      - run: yarn build
+      - run: yarn package
+
+      - name: e2e-test
+        uses: ./build_create-branch-config
+        with:
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+          OWNER_NAME: ${{ vars.OWNER_NAME }}
+          APP_NAME: ${{ vars.APP_NAME }}
+          BRANCH: ${{ vars.BRANCH }}
+          CONFIG: ${{ vars.CONFIG }}
+
+#  generate:
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 10
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          ref: ${{ github.head_ref }}
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: 16
+#          cache: yarn
+#      - run: yarn
+#      - run: yarn format
+#      - uses: int128/update-generated-files-action@v2
