@@ -56,11 +56,11 @@ jobs:
       - name: e2e-test
         uses: ./build_create-branch-config
         with:
-          apiToken: ${{ secrets.API_TOKEN }}
-          ownerName: ${{ secrets.OWNER_NAME }}
-          appName: ${{ secrets.APP_NAME }}
-          branch: ${{ secrets.BRANCH }}
-          config: ${{ secrets.CONFIG }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+          OWNER_NAME: ${{ secrets.OWNER_NAME }}
+          APP_NAME: ${{ secrets.APP_NAME }}
+          BRANCH: ${{ secrets.BRANCH }}
+          CONFIG: ${{ secrets.CONFIG }}
 
 #  generate:
 #    runs-on: ubuntu-latest
