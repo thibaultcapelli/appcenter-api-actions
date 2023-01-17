@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: pwd
-      - run: ls
+      - run: ls -a
       - name: Make envfile
         run: |
          touch .env
@@ -39,7 +39,7 @@ jobs:
          echo CONFIG=${{ secrets.CONFIG }} >> .env
          cat .env
       - run: pwd 
-      - run: ls
+      - run: ls -a
       - uses: actions/setup-node@v3
         with:
           node-version: 16
