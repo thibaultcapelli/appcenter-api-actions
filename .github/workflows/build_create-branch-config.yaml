@@ -36,6 +36,7 @@ jobs:
           APP_NAME: ${{ secrets.APP_NAME }}
           BRANCH: ${{ github.ref_name }}
           CONFIG: ${{ secrets.CONFIG }}
+          directory: ./
       - run: ls
       - uses: actions/setup-node@v3
         with:
