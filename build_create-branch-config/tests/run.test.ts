@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv'
 import { run } from '../src/run'
-import { fetchApi } from "common/lib/services/api";
+import { fetchApi } from "@appcenter-api-actions/common/lib/services/api";
 
 dotenv.config();
 
