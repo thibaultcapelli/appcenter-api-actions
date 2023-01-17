@@ -36,7 +36,7 @@ jobs:
           APP_NAME: ${{ secrets.APP_NAME }}
           BRANCH: ${{ github.ref_name }}
           CONFIG: ${{ secrets.CONFIG }}
-          directory: build_create-branch-config
+      - run: ls
       - uses: actions/setup-node@v3
         with:
           node-version: 16
