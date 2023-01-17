@@ -30,15 +30,12 @@ jobs:
       - run: pwd
       - run: ls
       - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          API_TOKEN: ${{ secrets.API_TOKEN }}
-          OWNER_NAME: ${{ secrets.OWNER_NAME }}
-          APP_NAME: ${{ secrets.APP_NAME }}
-          BRANCH: ${{ github.ref_name }}
-          CONFIG: ${{ secrets.CONFIG }}
-          directory: common
-      - run: pwd
+        run: echo "API_TOKEN=" + ${{ secrets.API_TOKEN }} >> .env && \
+             echo "OWNER_NAME=" + ${{ secrets.OWNER_NAME }} >> .env && \
+             echo "APP_NAME=" + ${{ secrets.APP_NAME }} >> .env && \
+             echo "BRANCH=" + ${{ github.ref_name }} >> .env && \
+             echo "CONFIG=" + ${{ secrets.CONFIG }} >> .env && \
+      - run: pwd 
       - run: ls
       - uses: actions/setup-node@v3
         with:
