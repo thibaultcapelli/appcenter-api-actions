@@ -1,6 +1,5 @@
 import * as core from '@actions/core'
 import { FetchError } from 'node-fetch'
-import winston from 'winston'
 
 import { fetchApi } from '@appcenter-api-actions/common/lib/services/api'
 import logger from '@appcenter-api-actions/common/lib/utils/logger'
