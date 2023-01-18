@@ -1,0 +1,27 @@
+name: apppcenter-build_update-branch-config
+description: Update an App Center build config
+
+inputs:
+  API_TOKEN:
+    description: The App Center API token of your app
+    required: true
+  OWNER_NAME:
+    description: The App Center owner name
+    required: true
+  APP_NAME:
+    description: The App Center app name
+    required: true
+  BRANCH:
+    description: The App Center branch
+    required: true
+  CONFIG:
+    description: The App Center config
+    required: true
+
+outputs:
+  response:
+    description: The API response
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
