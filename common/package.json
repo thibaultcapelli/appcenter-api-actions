@@ -13,7 +13,9 @@
     "ci:package": "yarn build && yarn package"
   },
   "dependencies": {
-    "@actions/core": "1.10.0"
+    "@actions/core": "1.10.0",
+    "@types/winston": "^2.4.4",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@tsconfig/node16": "1.0.3",
