@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import {FetchError, Response} from 'node-fetch'
 
 import {fetchApi} from '@appcenter-api-actions/common/lib/services/api'
+import logger from '../../common/lib/utils/logger'
 
 interface Params {
     ownerName: string;
@@ -28,15 +29,9 @@ interface Inputs {
 export const run = async ({apiToken, ...params}: Inputs): Promise<object> => {
     try {
         const response = await createBranchConfig(params, apiToken);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const json = await response.json();
 
-        console.group();
-        console.info(`*******************`);
-        console.info(`API response`);
-        console.info(`*******************`);
-        console.info(json);
-        console.groupEnd();
+        logger.info('API response', json);
 
         core.setOutput('json', json);
         return response;
