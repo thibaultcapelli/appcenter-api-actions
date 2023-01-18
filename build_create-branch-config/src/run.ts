@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import {FetchError, Response} from 'node-fetch'
 
 import {fetchApi} from '@appcenter-api-actions/common/lib/services/api'
-import logger from '../../common/lib/utils/logger'
+import logger from '@appcenter-api-actions/common/lib/utils/logger'
 
 interface Params {
     ownerName: string;
