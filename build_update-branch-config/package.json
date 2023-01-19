@@ -2,7 +2,7 @@
   "name": "build_update-branch-config",
   "version": "0.0.0",
   "private": true,
-  "main": "lib/build_update-branch-config/src/main.js",
+  "main": "lib/src/main.js",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write **/*.ts",
