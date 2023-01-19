@@ -16,8 +16,10 @@ inputs:
     required: true
 
 outputs:
-  response:
-    description: The API response
+  status:
+    description: The API response status
+  body:
+    description: The API response body
 
 runs:
   using: 'node16'
