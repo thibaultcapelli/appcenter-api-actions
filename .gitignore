@@ -100,3 +100,6 @@ dist/
 
 # IntelliJ
 .idea
+
+# Generated files
+**/generated
