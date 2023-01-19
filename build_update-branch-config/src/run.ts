@@ -1,21 +1,13 @@
 import * as core from '@actions/core'
-import {FetchError} from 'node-fetch'
 
-import {fetchApi} from '../../common/src/services/api'
 import logger from '@appcenter-api-actions/common/lib/utils/logger'
+import AppCenter from '@appcenter-api-actions/api'
 
 interface Params {
     ownerName: string;
     appName: string;
     branch: string;
     config: any;
-}
-
-const updateBranchConfig = ({ownerName, appName, branch, config}: Params, apiToken: string) => {
-    const path = `${ownerName}/${appName}/branches/${branch}/config`;
-    const options = {method: 'PUT', body: JSON.stringify(config)};
-
-    return fetchApi(path, options, apiToken);
 }
 
 interface Inputs {
@@ -26,17 +18,22 @@ interface Inputs {
     config: any,
 }
 
-export const run = async ({apiToken, ...params}: Inputs): Promise<object> => {
+export const run = async ({apiToken, branch, ownerName, appName, config}: Inputs) => {
     try {
-        const response = await updateBranchConfig(params, apiToken);
-        const json = await response.json();
+        const appCenter = new AppCenter(apiToken);
+        const response = await appCenter.branchConfigurations_update({
+            ownerName,
+            appName,
+            branch,
+            params: config
+        });
 
-        logger.info('API response', json);
+        logger.info(`API response status: ${response.status}`);
 
-        core.setOutput('json', json);
+        core.setOutput('response', response);
         return response;
     } catch (error) {
-        core.setFailed(error as FetchError);
-        return error as FetchError;
+        core.setFailed((error as Error).message);
+        return error;
     }
 }

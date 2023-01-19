@@ -1,11 +1,8 @@
 import * as dotenv from 'dotenv'
-import { fetchApi } from '@appcenter-api-actions/common/lib/services/api';
 
 import { run } from '../src/run'
 
 dotenv.config();
-
-console.info("CONFIG", process.env.CONFIG);
 
 const apiToken = process.env.API_TOKEN as string;
 const ownerName = process.env.OWNER_NAME as string;
@@ -18,5 +15,5 @@ beforeEach(async () => {
 });
 
 test('run successfully', async () => {
-    await expect(run({apiToken, branch, appName, ownerName, config})).resolves.toHaveProperty('ok', true);
+    await expect(run({apiToken, branch, appName, ownerName, config})).resolves.toHaveProperty('status', 200);
 })
