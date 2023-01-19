@@ -2,6 +2,10 @@ import * as core from '@actions/core'
 
 import logger from '@appcenter-api-actions/common/lib/utils/logger'
 import AppCenter from '@appcenter-api-actions/api'
+import {
+    ResponseWithBody,
+    Response_branchConfigurations_get_default
+} from '@appcenter-api-actions/api/lib/generated/app-center';
 
 interface Params {
     ownerName: string;
@@ -27,11 +31,10 @@ export const run = async ({apiToken, branch, ownerName, appName}: Inputs) => {
 
         logger.info(`API response status: ${response.status}`);
 
-        core.setOutput('response', response);
+        core.setOutput('status', response);
         return response;
     } catch (error) {
-        logger.info(String(error as Error));
-        core.setFailed((error as Error).message);
+        core.setOutput('status', (error as ResponseWithBody<number, Response_branchConfigurations_get_default>).status);
         return error;
     }
 }
