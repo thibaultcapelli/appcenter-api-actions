@@ -45,12 +45,18 @@ jobs:
       - run: yarn package
 
       - name: e2e-test
+        id: get_config
         uses: ./build_get-branch-config
         with:
           API_TOKEN: ${{ secrets.API_TOKEN }}
           OWNER_NAME: ${{ vars.OWNER_NAME }}
           APP_NAME: ${{ vars.APP_NAME }}
           BRANCH: ${{ vars.BRANCH }}
+      - name: Print response status
+        run: echo ${{ steps.get_config.outputs.status }}
+      - name: Print response body
+        run: echo ${{ steps.get_config.outputs.body }}
+      
 
 #  generate:
 #    runs-on: ubuntu-latest
