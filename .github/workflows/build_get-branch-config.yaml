@@ -37,9 +37,8 @@ jobs:
           node-version: 16
           cache: yarn
       - run: yarn
-      - run: yarn workspace @appcenter-api-actions/common install
-      - run: yarn workspace @appcenter-api-actions/common run build
-      - run: yarn workspace @appcenter-api-actions/common run package
+      - run: yarn workspace @appcenter-api-actions/common run ci:package
+      - run: yarn workspace @appcenter-api-actions/api run ci:package
 #       - run: yarn lint
       - run: yarn test
       - run: yarn build

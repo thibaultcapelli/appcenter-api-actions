@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import { fetchApi } from '@appcenter-api-actions/common/lib/services/api';
+import AppCenter from '@appcenter-api-actions/api'
 
 import { run } from '../src/run'
 
@@ -11,13 +11,17 @@ const appName = process.env.APP_NAME as string;
 const branch = process.env.BRANCH as string;
 const config = JSON.parse(process.env.CONFIG as string) as object;
 
-beforeEach(async () => {
-    const path = `${ownerName}/${appName}/branches/${branch}/config`;
-    const options = {method: 'DELETE'};
+jest.setTimeout(10000);
 
-    await fetchApi(path, options, apiToken);
+const appCenter = new AppCenter(apiToken);
+
+beforeEach(async () => {
+    const response = await appCenter.branchConfigurations_get({ownerName, appName, branch});
+    if (response.status === 200) {
+        await appCenter.branchConfigurations_delete({ownerName, appName, branch});
+    }
 });
 
 test('run successfully', async () => {
-    await expect(run({apiToken, branch, appName, ownerName, config})).resolves.toHaveProperty('ok', true);
+    await expect(run({apiToken, branch, appName, ownerName, config})).resolves.toHaveProperty('status', 200);
 })

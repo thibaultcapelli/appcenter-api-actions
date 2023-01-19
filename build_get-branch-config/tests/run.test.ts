@@ -1,5 +1,4 @@
 import * as dotenv from 'dotenv'
-import { fetchApi } from '@appcenter-api-actions/common/lib/services/api';
 
 import { run } from '../src/run'
 
@@ -10,10 +9,8 @@ const ownerName = process.env.OWNER_NAME as string;
 const appName = process.env.APP_NAME as string;
 const branch = process.env.BRANCH as string;
 
-beforeEach(async () => {
-    // TODO: Create a configuration for the given branch to update it.
-});
+jest.setTimeout(10000);
 
 test('run successfully', async () => {
-    await expect(run({apiToken, branch, appName, ownerName})).resolves.toHaveProperty('ok', true);
+    await expect(run({apiToken, branch, appName, ownerName})).resolves.toHaveProperty('status', 200);
 })

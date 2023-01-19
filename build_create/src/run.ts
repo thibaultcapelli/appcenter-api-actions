@@ -1,19 +1,12 @@
 import * as core from '@actions/core'
-import {FetchError} from 'node-fetch'
 
-import {fetchApi} from '@appcenter-api-actions/common/lib/services/api'
 import logger from '@appcenter-api-actions/common/lib/utils/logger'
+import AppCenter from '@appcenter-api-actions/api'
 
 interface Params {
     ownerName: string;
     appName: string;
     branch: string;
-}
-
-const createBuild = ({ownerName, appName, branch}: Params, apiToken: string) => {
-    const path = `${ownerName}/${appName}/branches/${branch}/builds`;
-
-    return fetchApi(path, {method: 'POST'}, apiToken);
 }
 
 interface Inputs {
@@ -23,17 +16,21 @@ interface Inputs {
     branch: string,
 }
 
-export const run = async ({apiToken, ...params}: Inputs): Promise<object> => {
+export const run = async ({apiToken, branch, ownerName, appName}: Inputs) => {
     try {
-        const response = await createBuild(params, apiToken);
-        const json = await response.json();
+        const appCenter = new AppCenter(apiToken);
+        const response = await appCenter.builds_create({
+            ownerName,
+            appName,
+            branch,
+        });
 
-        logger.info('API response', json);
+        logger.info(`API response status: ${response.status}`);
 
-        core.setOutput('config', json);
+        core.setOutput('response', response);
         return response;
     } catch (error) {
-        core.setFailed(error as FetchError);
-        return error as FetchError;
+        core.setFailed((error as Error).message);
+        return error;
     }
 }

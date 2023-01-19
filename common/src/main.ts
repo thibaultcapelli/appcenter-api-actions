@@ -1,5 +1,5 @@
-import {fetchApi} from './services/api'
+import loggger from './utils/logger'
 
 export {
-    fetchApi,
+    loggger,
 }
