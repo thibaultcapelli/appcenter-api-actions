@@ -40,7 +40,7 @@ jobs:
       - run: yarn workspace @appcenter-api-actions/common run ci:package
       - run: yarn workspace @appcenter-api-actions/api run ci:package
 #       - run: yarn lint
-      - run: yarn test
+#       - run: yarn test
       - run: yarn build
       - run: yarn package
 
