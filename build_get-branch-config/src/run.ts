@@ -31,7 +31,7 @@ export const run = async ({apiToken, branch, ownerName, appName}: Inputs) => {
         return response;
     } catch (error) {
         logger.info(String(error as Error));
-        core.setFailed((error as Error).message);
+        core.setFailed((error as Error).name);
         return error;
     }
 }
