@@ -33,7 +33,6 @@ export const run = async ({apiToken, branch, ownerName, appName, config}: Inputs
         core.setOutput('response', response);
         return response;
     } catch (error) {
-        logger.info(`ERROR HERE: ${(error as Error).message}`);
         core.setFailed((error as Error).message);
         return error;
     }
