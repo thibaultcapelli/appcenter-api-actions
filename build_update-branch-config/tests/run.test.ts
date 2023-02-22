@@ -9,7 +9,7 @@ const apiToken = process.env.API_TOKEN as string;
 const ownerName = process.env.OWNER_NAME as string;
 const appName = process.env.APP_NAME as string;
 const branch = process.env.BRANCH as string;
-const configPath = path.join(__dirname, '../fixtures/build-config');
+const configPath = path.join(__dirname, '../fixtures/build-config.json');
 
 jest.setTimeout(10000);
 
