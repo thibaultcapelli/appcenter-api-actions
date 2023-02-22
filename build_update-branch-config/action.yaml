@@ -14,7 +14,7 @@ inputs:
   BRANCH:
     description: The App Center branch
     required: true
-  CONFIG:
+  CONFIG_FILE:
     description: The App Center config
     required: true
 

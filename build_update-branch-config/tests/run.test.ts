@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv'
+import path from 'path';
 
 import { run } from '../src/run'
 
@@ -8,7 +9,7 @@ const apiToken = process.env.API_TOKEN as string;
 const ownerName = process.env.OWNER_NAME as string;
 const appName = process.env.APP_NAME as string;
 const branch = process.env.BRANCH as string;
-const config = JSON.parse(process.env.CONFIG as string) as object;
+const configPath = path.join(__dirname, '../fixtures/build-config');
 
 jest.setTimeout(10000);
 
@@ -17,5 +18,5 @@ beforeEach(async () => {
 });
 
 test('run successfully', async () => {
-    await expect(run({apiToken, branch, appName, ownerName, config})).resolves.toHaveProperty('status', 200);
+    await expect(run({apiToken, branch, appName, ownerName, configPath})).resolves.toHaveProperty('status', 200);
 })

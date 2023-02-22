@@ -7,7 +7,7 @@ interface Params {
     ownerName: string;
     appName: string;
     branch: string;
-    config: any;
+    configPath: any;
 }
 
 interface Inputs {
@@ -15,11 +15,12 @@ interface Inputs {
     ownerName: string,
     appName: string,
     branch: string,
-    config: any,
+    configPath: string,
 }
 
-export const run = async ({apiToken, branch, ownerName, appName, config}: Inputs) => {
+export const run = async ({apiToken, branch, ownerName, appName, configPath}: Inputs) => {
     try {
+        const config = require(configPath);
         const appCenter = new AppCenter(apiToken);
         const response = await appCenter.branchConfigurations_update({
             ownerName,

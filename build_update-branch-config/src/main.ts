@@ -7,7 +7,7 @@ const main = async (): Promise<void> => {
     ownerName: core.getInput('OWNER_NAME', { required: true }),
     appName: core.getInput('APP_NAME', { required: true }),
     branch: core.getInput('BRANCH', { required: true }),
-    config: core.getInput('CONFIG', { required: true }),
+    configPath: core.getInput('CONFIG_FILE', { required: true }),
   })
 }
 
