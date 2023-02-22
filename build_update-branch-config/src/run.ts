@@ -22,7 +22,7 @@ export const run = async ({apiToken, branch, ownerName, appName, configPath}: In
     try {
         console.log(configPath, typeof configPath);
         const config = require(configPath);
-        console.log(config);
+        console.log(config, typeof config);
         const appCenter = new AppCenter(apiToken);
         const response = await appCenter.branchConfigurations_update({
             ownerName,
