@@ -20,7 +20,7 @@ interface Inputs {
 
 export const run = async ({apiToken, branch, ownerName, appName, configPath}: Inputs) => {
     try {
-        console.log(configPath);
+        console.log(configPath, typeof configPath);
         const config = require(configPath);
         console.log(config);
         const appCenter = new AppCenter(apiToken);
